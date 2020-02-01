@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "Home Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <img src="~/Content/image/Picture2.png" style="height:400px; width:400px; float:left" />
+        </div>
+        <div class="col-md-5">
+            <br />
+            <div class="tri-container">
+                <div class="tri-A1"></div>
+                <div class="tri-A2"></div>
+                <div class="tri-A3"></div>
+                <div class="tri-A4"></div>
+                <div class="tri-A5"></div>
+                <div class="tri-A6"></div>
+
+                <div class="tri-A7"></div>
+                <div class="tri-A8"></div>
+                <div class="tri-A9"></div>
+                <div class="tri-A10"></div>
+                <div class="tri-A11"></div>
+                <div class="tri-A12"></div>
+
+                <div class="tri-B1"></div>
+                <div class="tri-B2"></div>
+                <div class="tri-B3"></div>
+                <div class="tri-B4"></div>
+                <div class="tri-B5"></div>
+                <div class="tri-B6"></div>
+
+                <div class="tri-B7"></div>
+                <div class="tri-B8"></div>
+                <div class="tri-B9"></div>
+                <div class="tri-B10"></div>
+                <div class="tri-B11"></div>
+                <div class="tri-B12"></div>
+
+
+
+                <div class="tri-C1"></div>
+                <div class="tri-C2"></div>
+                <div class="tri-C3"></div>
+                <div class="tri-C4"></div>
+                <div class="tri-C5"></div>
+                <div class="tri-C6"></div>
+
+                <div class="tri-C7"></div>
+                <div class="tri-C8"></div>
+                <div class="tri-C9"></div>
+                <div class="tri-C10"></div>
+                <div class="tri-C11"></div>
+                <div class="tri-C12"></div>
+
+                <div class="tri-D1"></div>
+                <div class="tri-D2"></div>
+                <div class="tri-D3"></div>
+                <div class="tri-D4"></div>
+                <div class="tri-D5"></div>
+                <div class="tri-D6"></div>
+
+                <div class="tri-D7"></div>
+                <div class="tri-D8"></div>
+                <div class="tri-D9"></div>
+                <div class="tri-D10"></div>
+                <div class="tri-D11"></div>
+                <div class="tri-D12"></div>
+
+                <div class="tri-E1"></div>
+                <div class="tri-E2"></div>
+                <div class="tri-E3"></div>
+                <div class="tri-E4"></div>
+                <div class="tri-E5"></div>
+                <div class="tri-E6"></div>
+
+                <div class="tri-E7"></div>
+                <div class="tri-E8"></div>
+                <div class="tri-E9"></div>
+                <div class="tri-E10"></div>
+                <div class="tri-E11"></div>
+                <div class="tri-E12"></div>
+
+                <div class="tri-F1"></div>
+                <div class="tri-F2"></div>
+                <div class="tri-F3"></div>
+                <div class="tri-F4"></div>
+                <div class="tri-F5"></div>
+                <div class="tri-F6"></div>
+
+                <div class="tri-F7"></div>
+                <div class="tri-F8"></div>
+                <div class="tri-F9"></div>
+                <div class="tri-F10"></div>
+                <div class="tri-F11"></div>
+                <div class="tri-F12"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <span>Select Column and Row</span><br />
+            <select id="row-select">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+            </select>
+            <select id="col-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-5">
+            <br />
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <button id="submit-btn" class="btn btn-success">Submit</button>
+        </div>
+        <div class="col-lg-4">
+            <button id="refresh-btn" class="btn btn-primary">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#submit-btn").click(function () {
+            var r = $("#row-select").val();
+            var column = $("#col-select").val();
+            var url = 'https://localhost:44354/api/HomeApi/Get';
+            var data = 'id='+r + '_' + column; 
+
+
+            console.log(url); 
+            console.log(data); 
+           
+           
+                $.ajax({
+                type: "GET",
+                url: url,
+                // The key needs to match your method's input parameter (case-sensitive).              
+                    dataType: 'json', 
+                data:data, 
+               contentType: "application/json",               
+                    success: function (data) {
+                        // tri-select-odd
+                        // tri-select-even 
+                        var col = data.TriangleColumn; 
+                        var row = data.TriangleRow; 
+                        var className = 'tri-' + row + col; 
+                        var select = row + col; 
+                        var rownum = GetNumericRowValue(row); 
+
+                        console.log(className);
+                        console.log('row as num = '+rownum); 
+
+
+                        if (col % 2 == 1) {
+                            // odd  : ;
+                            $('.'+ className).css('border-bottom', '100px solid #fff');
+                        }
+                        else {
+                           $('.'+ className).css('border-top', '100px solid #fff');
+                        }
+                    },
+                failure: function(errMsg) {
+                    alert(errMsg);
+                }
+            });
+        });
+
+         $("#refresh-btn").click(function () {
+          location.reload(true);
+        });
+    });
+
+    function GetNumericRowValue(r) {
+        var _return = 0; 
+         switch(r)
+            {
+                case "A":
+                    _return = 0;
+                    break;
+                case "B":
+                    _return = 1;
+                    break;
+                case "C":
+                    _return = 2;
+                    break;
+                case "D":
+                    _return = 3;
+                    break;
+                case "E":
+                    _return = 4;
+                    break;
+                case "F":
+                    _return = 5;
+                    break;
+        }
+        return _return; 
+    }
+    
+</script>
